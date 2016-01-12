@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.custom.i18n.resources" value="applicationResource" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<constant name="struts.multipart.maxSize" value="10701096" />
+
+	<package name="edu-default" namespace="/" extends="json-default">
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.edu.interceptor.UserInterceptor" />
+			<interceptor-stack name="mystack">
+				<interceptor-ref name="userInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mystack"></default-interceptor-ref>
+		<global-results>
+			<result name="login" type="redirect">/login</result>
+		</global-results>
+	</package>
+
+	<package name="index" namespace="/" extends="edu-default">
+		<default-action-ref name="index" />
+		<action name="reg" class="homeAction" method="reg">
+			<result name="input">/reg.jsp</result>
+			<result name="error">/reg.jsp</result>
+			<result name="success" type="redirect">/login</result>
+		</action>
+		<action name="login" class="homeAction" method="login">
+			<result name="input">/login.jsp</result>
+			<result name="error">/login.jsp</result>
+			<result name="success" type="redirect">/index</result>
+		</action>
+		<action name="password" class="homeAction" method="password">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="logout" class="homeAction" method="logout">
+			<result name="success" type="redirect">/index</result>
+		</action>
+		<action name="index" class="homeAction" method="index">
+			<result>/index.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<action name="postMessage" class="homeAction" method="postMessage">
+			<result type="plainText">dsa</result>
+		</action>
+		<action name="showMessage" class="homeAction" method="showMessage">
+			<result>/showMessage.jsp</result>
+		</action>
+	</package>
+
+	<package name="couse" namespace="/course" extends="edu-default">
+		<action name="listCourse" class="courseAction" method="listCourse">
+			<result>/course/listCourse.jsp</result>
+		</action>
+		<action name="saveCourse" class="courseAction" method="saveCourse">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryCourse" class="courseAction" method="destoryCourse">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listBook" class="courseAction" method="listBook">
+			<result>/course/listBook.jsp</result>
+		</action>
+		<action name="saveBook" class="courseAction" method="saveBook">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryBook" class="courseAction" method="destoryBook">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listClassCourse" class="courseAction" method="listClassCourse">
+			<result>/course/listClassCourse.jsp</result>
+		</action>
+		<action name="saveClassCourse" class="courseAction" method="saveClassCourse">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryClassCourse" class="courseAction" method="destoryClassCourse">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listSchedule" class="courseAction" method="listSchedule">
+			<result>/course/listSchedule.jsp</result>
+		</action>
+		<action name="saveSchedule" class="courseAction" method="saveSchedule">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destorySchedule" class="courseAction" method="destorySchedule">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listScore" class="courseAction" method="listScore">
+			<result>/course/listScore.jsp</result>
+		</action>
+		<action name="saveScore" class="courseAction" method="saveScore">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryScore" class="courseAction" method="destoryScore">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="classCouse" namespace="/classCourse" extends="edu-default">
+		<action name="listClassCourse" class="classCourseAction"
+			method="listClassCourse">
+			<result>/classCourse/listClassCourse.jsp</result>
+		</action>
+		<action name="saveClassCourse" class="classCourseAction"
+			method="saveClassCourse">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryClassCourse" class="classCourseAction"
+			method="destoryClassCourse">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listSchedule" class="classCourseAction" method="listSchedule">
+			<result>/classCourse/listSchedule.jsp</result>
+		</action>
+		<action name="saveSchedule" class="classCourseAction" method="saveSchedule">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destorySchedule" class="classCourseAction"
+			method="destorySchedule">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="clsInfo" namespace="/clsInfo" extends="edu-default">
+		<action name="listClsInfo" class="clsInfoAction" method="listClsInfo">
+			<result>/clsInfo/listClsInfo.jsp</result>
+		</action>
+		<action name="saveClsInfo" class="clsInfoAction" method="saveClsInfo">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryClsInfo" class="clsInfoAction" method="destoryClsInfo">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listRoom" class="clsInfoAction" method="listRoom">
+			<result>/clsInfo/listRoom.jsp</result>
+		</action>
+		<action name="saveRoom" class="clsInfoAction" method="saveRoom">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryRoom" class="clsInfoAction" method="destoryRoom">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="exam" namespace="/exam" extends="edu-default">
+		<action name="listCet" class="examAction" method="listCet">
+			<result>/exam/listCet.jsp</result>
+		</action>
+		<action name="saveCet" class="examAction" method="saveCet">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryCet" class="examAction" method="destoryCet">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listComputer" class="examAction" method="listComputer">
+			<result>/exam/listComputer.jsp</result>
+		</action>
+		<action name="saveComputer" class="examAction" method="saveComputer">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryComputer" class="examAction" method="destoryComputer">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="listExam" class="examAction" method="listExam">
+			<result>/exam/listExam.jsp</result>
+		</action>
+		<action name="saveExam" class="examAction" method="saveExam">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryExam" class="examAction" method="destoryExam">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="article" namespace="/article" extends="edu-default">
+		<action name="listArticle" class="articleAction" method="listArticle">
+			<result>/article/listArticle.jsp</result>
+		</action>
+		<action name="showArticle" class="articleAction" method="showArticle">
+			<result>/article/showArticle.jsp</result>
+		</action>
+		<action name="postArticle" class="articleAction" method="postArticle">
+			<result type="redirect">/article/listArticle</result>
+			<result name="reply" type="redirect">/article/showArticle?article.id=${article.parent.id}</result>
+		</action>
+		<action name="removeArticle" class="articleAction" method="removeArticle">
+			<result type="redirect">/article/listArticle</result>
+		</action>
+	</package>
+	
+	<package name="resource" namespace="/resource" extends="edu-default">
+		<action name="listResource" class="fileAction" method="listResource">
+			<result>/resource/listResource.jsp</result>
+		</action>
+		<action name="addResource" class="fileAction" method="addResource">
+			<result type="redirect">/resource/listResource</result>
+		</action>
+		<action name="download" class="fileAction" method="download">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${fileFileName}"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="user" namespace="/user" extends="edu-default">
+		<action name="listUser" class="userAction" method="listUser">
+			<result>/user/listUser.jsp</result>
+		</action>
+		<action name="saveUser" class="userAction" method="saveUser">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="destoryUser" class="userAction" method="destoryUser">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
+</struts>
